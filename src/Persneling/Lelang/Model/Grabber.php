@@ -90,7 +90,7 @@ class Grabber
         $res['kualifikasi_usaha'] = $values[$_k-1]->text;
       }
       if ($keys[$_k]->text === 'Tahap Lelang Saat ini') {
-        $urljadwal = 'http://lpse.kemdikbud.go.id'.$values[$_k]->find('a')->getAttribute('href');
+        $urljadwal = $url.$values[$_k]->find('a')->getAttribute('href');
         $domjadwal = new Dom;
         $domjadwal->loadFromUrl($urljadwal);
         $jadwalvalues = $domjadwal->find('table tr td strong');
