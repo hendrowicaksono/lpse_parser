@@ -14,7 +14,7 @@ $versi = 'eproc4';
 **/
 $url = 'http://lpse.kemdikbud.go.id';
 $versi = 'eproc4'; # 'eproc' untuk spse versi 3
-$kode_lelang = '6015025';
+$kode_lelang = '6037025';
 $data = new LECGR;
 echo '<pre>';
 var_dump($data->getDataLelang($kode_lelang, $url, $versi));

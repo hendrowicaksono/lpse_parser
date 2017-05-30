@@ -18,6 +18,7 @@ class Grabber
       $versi = 'eproc4';
     }
     $urlinfo = $url.'/'.$versi.'/lelang/'.$kode_lelang.'/pengumumanlelang';
+    #echo $urlinfo;die();
     $dom = new Dom;
     $dom->loadFromUrl($urlinfo);
 
@@ -32,9 +33,11 @@ class Grabber
         $res['nama_lelang'] = $values[$_k]->text;
       }
       if ($keys[$_k]->text === 'Kode RUP') {
-         $res['kode_rup'] = $values[$_k]->text;
+        $res['kode_rup'] = $values[$_k]->text;
       }
-     $res['lingkup_pekerjaan'] = $values[3]->text;
+      if (!empty($values[3])) {
+        $res['lingkup_pekerjaan'] = $values[3]->text;
+      }
     }
 
     $values = $dom->find('.content table tr td');
@@ -97,9 +100,12 @@ class Grabber
         $an = count($jadwalvalues);
         $res['tahap_lelang_saat_ini'] = $jadwalvalues[$an-1]->text;
       }
+      
+      #echo $values[$_k-1]->find('ul li')->text;die('---');
       if ($keys[$_k]->text === 'Lokasi Pekerjaan') {
         $res['lokasi_pekerjaan'] = $values[$_k-1]->find('ul li')->text;
       }
+
     }
     return $res;
   }
